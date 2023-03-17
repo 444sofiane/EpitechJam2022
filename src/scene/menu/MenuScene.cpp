@@ -11,18 +11,42 @@
 #include "Slider.hpp"
 #include "ResourceManager.hpp"
 #include "SceneManager.hpp"
+#include "info.hpp"
 
 namespace jam {
 
 MenuScene::MenuScene()
 {
-    m_uiElements.insert(std::make_pair("test text", std::shared_ptr<ui::Widget>(new ui::UIText())));
+    m_uiElements["Title"] = std::make_shared<ui::UIText>();
+    m_uiElements["Play"] = std::make_shared<ui::Button>(getResource().getTexture("generic_button"), "Play");
+    m_uiElements["Settings"] = std::make_shared<ui::Button>(getResource().getTexture("generic_button"), "Settings");
+    m_uiElements["Exit"] = std::make_shared<ui::Button>(getResource().getTexture("generic_button"), "Exit");
 
-    ui::UIText* test_text = ((ui::UIText*)m_uiElements.at("test text").get());
-    test_text->setString("Main Menu");
-    test_text->setFont(getResource().getFont("debugFont"));
-    test_text->setPosition({960, 540});
-    test_text->setOrigin(test_text->getGlobalBounds().width / 2, test_text->getGlobalBounds().height / 2);
+    sf::Vector2u wSize = info::getWindowSize();
+
+    ui::Button* playButton = ((ui::Button*)m_uiElements.at("Play").get());
+    playButton->setPosition({wSize.x * 0.5, wSize.y * 0.25});
+    playButton->setBaseScale(3.0f, 3.0f);
+    playButton->setFunction([] { /*SceneManager::getInstance().setCurrentScene("Game")*/; });
+
+    ui::Button* settingsButton = ((ui::Button*)m_uiElements.at("Settings").get());
+    settingsButton->setPosition({wSize.x * 0.5, wSize.y * 0.40});
+    settingsButton->setBaseScale(3.0f, 3.0f);
+    settingsButton->setFunction([] { SceneManager::getInstance().setCurrentScene("Settings"); });
+
+    ui::Button* exitButton = ((ui::Button*)m_uiElements.at("Exit").get());
+    exitButton->setPosition({wSize.x * 0.5, wSize.y * 0.55});
+    exitButton->setBaseScale(3.0f, 3.0f);
+    exitButton->setFunction([] { exit(0); });
+
+    ui::UIText* title = ((ui::UIText*)m_uiElements.at("Title").get());
+    title->setString("NerdSimulator");
+    title->setFont(getResource().getFont("debugFont"));
+    title->setPosition({wSize.x * 0.5, wSize.y * 0.1});
+    title->setOrigin(title->getGlobalBounds().width / 2, title->getGlobalBounds().height / 2);
+
+    m_background.setSize({1920, 1080});
+    m_background.setTexture(&getResource().getTexture("menu_bg"));
 }
 
 MenuScene::~MenuScene()
@@ -42,6 +66,7 @@ void MenuScene::update(float dt)
 
 void MenuScene::render(sf::RenderTarget& target)
 {
+    target.draw(m_background);
     for (auto& [key, element] : m_uiElements) {
         element->render(target);
     }

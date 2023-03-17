@@ -2,21 +2,21 @@
 ** EPITECH PROJECT, 2023
 ** Jam
 ** File description:
-** MenuScene
+** SettingsScene
 */
 
-#ifndef MENUSCENE_HPP_
-    #define MENUSCENE_HPP_
+#ifndef SETTINGSSCENE_HPP_
+    #define SETTINGSSCENE_HPP_
 
     #include "IScene.hpp"
     #include "Widget.hpp"
 
     namespace jam {
 
-    class MenuScene : public IScene {
+    class SettingsScene : public IScene {
         public:
-            MenuScene();
-            virtual ~MenuScene() override;
+            SettingsScene();
+            virtual ~SettingsScene() override;
             virtual void handleEvent(sf::Event& event, sf::RenderWindow& window) override;
             virtual void update(float dt) override;
             virtual void render(sf::RenderTarget& target) override;
@@ -27,4 +27,4 @@
 
     }
 
-#endif /* !MENUSCENE_HPP_ */
+#endif /* !SETTINGSSCENE_HPP_ */

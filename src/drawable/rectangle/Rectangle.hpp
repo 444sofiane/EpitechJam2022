@@ -20,7 +20,7 @@
             void setBaseScale(float x, float y);
             sf::Vector2f getBaseScale() const;
         protected:
-            sf::Vector2f m_baseScale;
+            sf::Vector2f m_baseScale = {1, 1};
         };
     }
 

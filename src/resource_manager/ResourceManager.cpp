@@ -20,6 +20,9 @@ void ResourceManager::loadAssets()
 {
     loadFont("debugFont", "asset/font/debug_font.ttf");
     loadFont("gameFont", "asset/font/game_font.ttf");
+
+    loadTexture("menu_bg", "asset/texture/menu_bg.png");
+    loadTexture("generic_button", "asset/texture/generic_button.png");
 }
 
 ResourceManager& ResourceManager::getInstance()

@@ -7,6 +7,7 @@
 
 #include "Engine.hpp"
 #include "MenuScene.hpp"
+#include "SettingsScene.hpp"
 #include "ResourceManager.hpp"
 #include "Clock.hpp"
 #include "info.hpp"
@@ -35,7 +36,8 @@ void Engine::init()
     m_fpsHint.setOutlineColor(sf::Color::Black);
     m_fpsHint.setOutlineThickness(1);
 
-    m_sceneManager.addScene("Main Menu", std::shared_ptr<IScene>(new MenuScene));
+    m_sceneManager.addScene("Main Menu", std::make_shared<MenuScene>());
+    m_sceneManager.addScene("Settings", std::make_shared<SettingsScene>());
     m_sceneManager.setCurrentScene("Main Menu");
 }
 
