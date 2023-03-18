@@ -25,11 +25,14 @@ SettingsScene::SettingsScene()
     ui::Button* exitButton = ((ui::Button*)m_uiElements.at("Back").get());
     exitButton->setPosition({wSize.x * 0.5, wSize.y * 0.55});
     exitButton->setBaseScale(3.0f, 3.0f);
+    exitButton->getLabel().setFont(getResource().getFont("nathanFont"));
+    exitButton->getLabel().setCharacterSize(50);
     exitButton->setFunction([] { SceneManager::getInstance().setCurrentScene("Main Menu"); });
 
     ui::UIText* title = ((ui::UIText*)m_uiElements.at("Title").get());
     title->setString("Settings");
-    title->setFont(getResource().getFont("debugFont"));
+    title->setFont(getResource().getFont("nathanFont"));
+    title->setCharacterSize(100);
     title->setPosition({wSize.x * 0.5, wSize.y * 0.1});
     title->setOrigin(title->getGlobalBounds().width / 2, title->getGlobalBounds().height / 2);
 

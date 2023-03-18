@@ -23,17 +23,16 @@ Button::Button(const sf::Texture& texture, const std::string& label)
     setTextureRect(m_animation.getFrame(0));
 
     Rectangle::setSize(sf::Vector2f(texture.getSize().x / 3, texture.getSize().y));
-    setOrigin(getSize() * 0.5f);
+    setOrigin(getGlobalBounds().width * 0.5f, getGlobalBounds().height * 0.5f);
     m_label.setString(label);
     m_label.setFont(getResource().getFont("gameFont"));
     m_label.setOrigin(m_label.getGlobalBounds().width / 2, m_label.getGlobalBounds().height / 2);
     m_label.setPosition(this->getPosition());
 }
 
-void Button::setLabel(const std::string& label)
+Widget::Text& Button::getLabel()
 {
-    m_label.setString(label);
-    m_label.setOrigin(m_label.getGlobalBounds().width / 2, m_label.getGlobalBounds().height / 2);
+    return m_label;
 }
 
 void Button::setFunction(std::function<void(void)> func)
@@ -63,7 +62,7 @@ void Button::handleEvent(sf::Event e, const sf::RenderWindow& window)
         m_state = IDLE;
         setTextureRect(m_animation.getFrame(0));
         setScale(m_baseScale);
-        m_label.setFillColor(sf::Color(80, 80, 80, 255));
+        m_label.setFillColor(sf::Color(150, 150, 150, 255));
     }
 }
 
@@ -80,7 +79,9 @@ sf::Vector2f Button::getSize() const
 
 void Button::render(sf::RenderTarget& target)
 {
-    target.draw(*this);
+    //target.draw(*this);
+    m_label.setOrigin(m_label.getGlobalBounds().width / 2,
+    m_label.getGlobalBounds().height / 2);
     target.draw(m_label);
 }
 

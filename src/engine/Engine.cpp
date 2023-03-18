@@ -8,9 +8,11 @@
 #include "Engine.hpp"
 #include "MenuScene.hpp"
 #include "SettingsScene.hpp"
+#include "RoomScene.hpp"
 #include "ResourceManager.hpp"
 #include "Clock.hpp"
 #include "info.hpp"
+#include "Cursor.hpp"
 
 namespace jam {
 
@@ -29,6 +31,10 @@ void Engine::init()
     m_window = std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow(sf::VideoMode(WINDOW_SIZE.x, WINDOW_SIZE.y),
         std::string("Game"), sf::Style::Default));
 
+    m_window->setMouseCursorVisible(false);
+
+    Cursor::getInstance()->setTexture(ResourceManager::getInstance().getTexture("cursor loupe"));
+
     m_window->setVerticalSyncEnabled(true);
     //m_window->setFramerateLimit(5);
 
@@ -38,6 +44,7 @@ void Engine::init()
 
     m_sceneManager.addScene("Main Menu", std::make_shared<MenuScene>());
     m_sceneManager.addScene("Settings", std::make_shared<SettingsScene>());
+    m_sceneManager.addScene("Harry Potter", std::make_shared<RoomScene>());
     m_sceneManager.setCurrentScene("Main Menu");
 }
 
@@ -58,6 +65,7 @@ void Engine::render()
     m_window->clear();
     m_sceneManager.getCurrentScene()->render(*m_window.get());
     m_window->draw(m_fpsHint);
+    Cursor::getInstance()->render(*m_window);
     m_window->display();
 }
 
@@ -76,6 +84,7 @@ void Engine::update()
     getClock().update();
     info::gatherWindowInfo(*m_window.get());
     updateFpsHint();
+    Cursor::getInstance()->setPosition(info::getMousePosition(*m_window));
     m_sceneManager.getCurrentScene()->update(getClock().getFrameDt());
 }
 

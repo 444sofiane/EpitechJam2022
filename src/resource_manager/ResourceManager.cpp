@@ -20,9 +20,12 @@ void ResourceManager::loadAssets()
 {
     loadFont("debugFont", "asset/font/debug_font.ttf");
     loadFont("gameFont", "asset/font/game_font.ttf");
+    loadFont("nathanFont", "asset/font/Nathan.ttf");
 
     loadTexture("menu_bg", "asset/texture/menu_bg.png");
     loadTexture("generic_button", "asset/texture/generic_button.png");
+    loadTexturesFromFolder("asset/texture/rooms");
+    loadTexture("cursor loupe", "asset/texture/loupe.png");
 }
 
 ResourceManager& ResourceManager::getInstance()

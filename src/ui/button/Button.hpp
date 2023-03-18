@@ -21,7 +21,7 @@
                 enum State { IDLE, HOVERED, PRESSED };
                 Button(const sf::Texture& texture, const std::string& label);
                 void setFunction(std::function<void(void)> func);
-                void setLabel(const std::string& label);
+                Text& getLabel();
                 virtual void handleEvent(sf::Event e, const sf::RenderWindow& window) override;
                 virtual void setPosition(const sf::Vector2f& pos) override;
                 virtual sf::Vector2f getSize() const override;
