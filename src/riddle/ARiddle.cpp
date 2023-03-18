@@ -26,7 +26,6 @@ namespace jam {
         m_question.setString("");
         m_question.setCharacterSize(50);
 
-        m_background.setFillColor(sf::Color(50, 50, 50, 255));
         m_background.setOutlineColor(sf::Color::Black);
         m_background.setOutlineThickness(2);
     }

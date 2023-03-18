@@ -13,6 +13,7 @@
 #include "SceneManager.hpp"
 #include "info.hpp"
 #include "ClickRiddle.hpp"
+#include "InputRiddle.hpp"
 
 namespace jam {
 
@@ -35,7 +36,7 @@ void Room1::restart()
 
     m_riddles.clear();
 
-    m_riddles.push_back(std::make_unique<ClickRiddle>("What is the name of the main character of Harry Potter?", sf::IntRect(0, 0, 100, 100)));
+    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
     m_riddles.push_back(std::make_unique<ClickRiddle>("What dinosaur has 500 teeth", sf::IntRect(0, 0, 100, 100)));
 
     for (auto& riddle : m_riddles)

@@ -28,6 +28,7 @@ Button::Button(const sf::Texture& texture, const std::string& label)
     m_label.setFont(getResource().getFont("gameFont"));
     m_label.setOrigin(m_label.getGlobalBounds().width / 2, m_label.getGlobalBounds().height / 2);
     m_label.setPosition(this->getPosition());
+    m_label.setFillColor(sf::Color(150, 150, 150, 255));
 }
 
 Widget::Text& Button::getLabel()

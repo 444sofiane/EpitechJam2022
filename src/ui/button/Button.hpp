@@ -30,7 +30,7 @@
             protected:
                 Text m_label;
                 Animation m_animation;
-                State m_state;
+                State m_state = IDLE;
                 std::function<void(void)> m_function = []() {};
         };
     }

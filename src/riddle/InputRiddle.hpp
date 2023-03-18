@@ -8,6 +8,7 @@
 #pragma once
 
 #include "ARiddle.hpp"
+#include "Rectangle.hpp"
 
 namespace jam {
 
@@ -17,16 +18,22 @@ namespace jam {
             InputRiddle(const std::string& question, const std::string& answer);
             ~InputRiddle() override = default;
 
-            void setClickRect(const sf::IntRect& rect);
             void handleEvent(const sf::Event& event, sf::RenderWindow& window) override;
 
             void render(sf::RenderTarget &window) override;
             void update() override;
+
+        private:
+            bool compareAnswer();
+
         protected:
             std::string m_question;
             std::string m_answer;
             std::string m_input;
             ui::UIText m_inputText;
+            ui::UIText m_inputHint;
+            Rectangle m_inputBox;
+            float m_lastBlink;
     };
 
 }
