@@ -87,7 +87,7 @@ void Engine::update()
     getClock().update();
     info::gatherWindowInfo(*m_window.get());
     updateFpsHint();
-    Cursor::getInstance()->setPosition(info::getMousePosition(*m_window));
+    Cursor::getInstance()->setPosition(info::getMousePosition());
     m_sceneManager.getCurrentScene()->update(getClock().getFrameDt());
 }
 

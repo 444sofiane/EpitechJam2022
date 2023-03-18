@@ -23,6 +23,10 @@ namespace jam {
 
             void render(sf::RenderTarget &window) override;
             void update() override;
+
+        private:
+            void bounceCursor();
+
         private:
             sf::RectangleShape m_clickRect;
     };

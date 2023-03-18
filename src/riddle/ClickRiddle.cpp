@@ -7,6 +7,8 @@
 
 #include "ClickRiddle.hpp"
 #include "info.hpp"
+#include "Cursor.hpp"
+#include "Clock.hpp"
 
 namespace jam {
 
@@ -37,11 +39,29 @@ namespace jam {
     void ClickRiddle::update()
     {
         ARiddle::update();
+
+        sf::Vector2f mousePos = info::getMousePosition();
+
+        if (m_clickRect.getGlobalBounds().contains(mousePos.x, mousePos.y))
+            bounceCursor();
+        else
+            Cursor::getInstance()->setScale(1, 1);
+    }
+
+    void ClickRiddle::bounceCursor()
+    {
+        float scale = std::cos(Clock::getInstance().getElapsedTime().asSeconds() * 6);
+
+        scale *= 0.2;
+        scale += 1;
+
+        Cursor::getInstance()->setScale(scale, scale);
     }
 
     void ClickRiddle::handleEvent(const sf::Event &event, sf::RenderWindow &window)
     {
-        sf::Vector2f mousePos = info::getMousePosition(window);
+        sf::Vector2f mousePos = info::getMousePosition();
+
         if (event.type == sf::Event::MouseButtonPressed) {
             if (m_clickRect.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
                 m_isFinished = true;

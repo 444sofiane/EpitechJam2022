@@ -31,6 +31,16 @@ namespace jam {
         target.draw(m_shape);
     }
 
+    void Cursor::setScale(const sf::Vector2f& scale)
+    {
+        m_shape.setScale(scale);
+    }
+
+    void Cursor::setScale(float x, float y)
+    {
+        m_shape.setScale(x, y);
+    }
+
     void Cursor::setTexture(const sf::Texture& texture)
     {
         m_shape.setTexture(&texture);

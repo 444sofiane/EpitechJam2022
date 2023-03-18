@@ -70,7 +70,7 @@ float Slider::getProgress() const
 
 void Slider::handleEvent(sf::Event e, const sf::RenderWindow& window)
 {
-    sf::Vector2f mousePos = info::getMousePosition(window);
+    sf::Vector2f mousePos = info::getMousePosition();
     sf::FloatRect railBound = m_internRail.getGlobalBounds();
     sf::FloatRect detectionBound = railBound;
     sf::Vector2f diff;

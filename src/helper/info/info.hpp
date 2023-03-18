@@ -12,7 +12,7 @@
 
     namespace jam {
         namespace info {
-            extern sf::Vector2f getMousePosition(const sf::RenderWindow& window);
+            extern sf::Vector2f getMousePosition();
             extern sf::Vector2u getWindowSize();
             extern void gatherWindowInfo(const sf::RenderWindow& window);
             extern void printMousePosition(const sf::RenderWindow &window);
