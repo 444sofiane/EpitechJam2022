@@ -20,6 +20,13 @@ Room1::Room1()
 {
     ui::UIText* title = ((ui::UIText*)m_uiElements.at("Title").get());
     title->setString("Room 1");
+
+    sf::Vector2f wSize(info::getWindowSize());
+
+    m_background.setTexture(&getResource().getTexture("harry_potter"));
+    m_background.setSize(sf::Vector2f(m_background.getTexture()->getSize()));
+    m_background.setOrigin(m_background.getSize() / 2.0f);
+    m_background.setPosition(wSize / 2.0f);
 }
 
 void Room1::restart()

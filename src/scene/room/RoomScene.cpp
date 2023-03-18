@@ -29,10 +29,10 @@ RoomScene::RoomScene()
     title->setPosition({wSize.x * 0.5, wSize.y * 0.02});
     title->setOrigin(title->getGlobalBounds().width / 2, title->getGlobalBounds().height / 2);
 
-    m_background.setTexture(&getResource().getTexture("harry_potter"));
-    m_background.setSize(sf::Vector2f(m_background.getTexture()->getSize()));
-    m_background.setOrigin(m_background.getSize() / 2.0f);
-    m_background.setPosition(wSize / 2.0f);
+    //m_background.setTexture(&getResource().getTexture("harry_potter"));
+    //m_background.setSize(sf::Vector2f(m_background.getTexture()->getSize()));
+    //m_background.setOrigin(m_background.getSize() / 2.0f);
+    //m_background.setPosition(wSize / 2.0f);
 
     m_scoreValue = 0;
 

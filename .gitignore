@@ -6,3 +6,6 @@ cmake_install.cmake
 
 #binary
 nerdSimulator
+
+#vscode files
+.vscode
