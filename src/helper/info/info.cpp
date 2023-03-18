@@ -18,6 +18,12 @@ namespace jam {
             return window.mapPixelToCoords(mouse_pos0, window.getView());
         }
 
+        void printMousePosition(const sf::RenderWindow &window)
+        {
+            sf::Vector2f mouse_pos = getMousePosition(window);
+            std::cout << "Mouse position: " << mouse_pos.x << "x, " << mouse_pos.y << "y\n";
+        }
+
         sf::Vector2u getWindowSize()
         {
             return windowSize;

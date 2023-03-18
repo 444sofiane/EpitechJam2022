@@ -24,9 +24,14 @@
             void setCurrentScene(const std::string& identifier);
             std::shared_ptr<IScene> getCurrentScene();
 
+            void nextScene();
+            std::shared_ptr<IScene> getNextScene();
+
         private:
-            std::unordered_map<std::string, std::shared_ptr<IScene>> m_scenes;
+            std::map<std::string, std::shared_ptr<IScene>> m_scenes;
             std::shared_ptr<IScene> m_currentScene;
+            int m_currentSceneIndex;
+            std::vector<std::shared_ptr<IScene>> m_scenesVector;
     };
 
     }

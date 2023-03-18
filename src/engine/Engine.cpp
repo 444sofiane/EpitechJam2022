@@ -8,11 +8,11 @@
 #include "Engine.hpp"
 #include "MenuScene.hpp"
 #include "SettingsScene.hpp"
-#include "RoomScene.hpp"
 #include "ResourceManager.hpp"
 #include "Clock.hpp"
 #include "info.hpp"
 #include "Cursor.hpp"
+#include "Room1.hpp"
 
 namespace jam {
 
@@ -44,7 +44,7 @@ void Engine::init()
 
     m_sceneManager.addScene("Main Menu", std::make_shared<MenuScene>());
     m_sceneManager.addScene("Settings", std::make_shared<SettingsScene>());
-    m_sceneManager.addScene("Harry Potter", std::make_shared<RoomScene>());
+    m_sceneManager.addScene("Harry Potter", std::make_shared<Room1>());
     m_sceneManager.setCurrentScene("Main Menu");
 }
 
@@ -55,6 +55,9 @@ void Engine::handleEvents()
             case sf::Event::Closed:
                 m_window->close();
                 break;
+            case sf::Event::MouseButtonPressed:
+                info::printMousePosition(*m_window.get());
+                break;
         }
         m_sceneManager.getCurrentScene()->handleEvent(m_event, *m_window);
     }
@@ -64,7 +67,7 @@ void Engine::render()
 {
     m_window->clear();
     m_sceneManager.getCurrentScene()->render(*m_window.get());
-    m_window->draw(m_fpsHint);
+    //m_window->draw(m_fpsHint);
     Cursor::getInstance()->render(*m_window);
     m_window->display();
 }
