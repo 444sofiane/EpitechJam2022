@@ -20,7 +20,7 @@ namespace jam {
 
         sf::Vector2u pos = info::getWindowSize();
 
-        m_background.setFillColor(sf::Color(0, 100, 0, 220));
+        m_background.setFillColor(sf::Color(0, 0, 0, 200));
 
         m_inputText.setFont(getResource().getFont("nathanFont"));
         m_inputText.setCharacterSize(40);
@@ -78,7 +78,9 @@ namespace jam {
                     m_input.pop_back();
             } else if (event.text.unicode == 13) {
                 if (compareAnswer()) {
-                    m_isFinished = true;
+                    m_isFinished = 1;
+                } else {
+                    m_isFinished = -1;
                 }
             } else if (event.text.unicode < 128 && event.text.unicode > 31) {
                 m_input += static_cast<char>(event.text.unicode);

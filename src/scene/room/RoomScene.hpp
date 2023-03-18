@@ -22,10 +22,19 @@ namespace jam {
             virtual void update(float dt) override;
             virtual void render(sf::RenderTarget& target) override;
             virtual void restart() override;
+            virtual void stop() override;
         protected:
             std::unordered_map<std::string, std::shared_ptr<ui::Widget>> m_uiElements;
             sf::RectangleShape m_background;
             sf::RectangleShape m_backgroundColor;
+
+            sf::Music* m_music = nullptr;
+
+            sf::Sound m_tickSound;
+            sf::Sound m_validateSound;
+            sf::Sound m_invalidSound;
+            float m_tickSoundTimer;
+            int m_nbRiddles;
 
             std::vector<std::shared_ptr<IRiddle>> m_riddles;
             std::shared_ptr<IRiddle> m_currentRiddle;

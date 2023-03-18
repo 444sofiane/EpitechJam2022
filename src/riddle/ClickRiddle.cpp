@@ -15,7 +15,7 @@ namespace jam {
     ClickRiddle::ClickRiddle(const std::string &question, const sf::IntRect &rect)
     : ARiddle(question)
     {
-        m_background.setFillColor(sf::Color(100, 0, 0, 220));
+        m_background.setFillColor(sf::Color(0, 0, 0, 200));
 
         m_clickRect.setSize(sf::Vector2f(rect.width, rect.height));
         m_clickRect.setPosition(sf::Vector2f(rect.left, rect.top));
@@ -64,7 +64,7 @@ namespace jam {
 
         if (event.type == sf::Event::MouseButtonPressed) {
             if (m_clickRect.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
-                m_isFinished = true;
+                m_isFinished = 1;
             }
         }
     }

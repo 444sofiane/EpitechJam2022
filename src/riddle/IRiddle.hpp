@@ -30,7 +30,7 @@ namespace jam {
             virtual float getRemainingTime() const = 0;
 
             virtual bool isDisplaying() const = 0;
-            virtual bool isFinished() const = 0;
+            virtual int isFinished() const = 0;
 
             virtual void render(sf::RenderTarget &window) = 0;
             virtual void update() = 0;

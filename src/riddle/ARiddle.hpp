@@ -29,7 +29,7 @@ namespace jam {
             virtual float getRemainingTime() const;
 
             virtual bool isDisplaying() const;
-            virtual bool isFinished() const;
+            virtual int isFinished() const;
 
             virtual void render(sf::RenderTarget &window);
             virtual void update();
@@ -37,9 +37,10 @@ namespace jam {
         protected:
             sf::RectangleShape m_background;
             ui::UIText m_question;
+            sf::Sound m_typingSound;
             std::string m_text;
             bool m_isDisplaying;
-            bool m_isFinished;
+            int m_isFinished = 0;
             float m_remainingTime;
             float m_totalTime;
             float m_displaySpeed;

@@ -13,6 +13,8 @@
 #include "SceneManager.hpp"
 #include "info.hpp"
 #include "ClickRiddle.hpp"
+#include "audio.hpp"
+#include "Clock.hpp"
 
 namespace jam {
 
@@ -29,12 +31,19 @@ RoomScene::RoomScene()
     title->setPosition({wSize.x * 0.5, wSize.y * 0.02});
     title->setOrigin(title->getGlobalBounds().width / 2, title->getGlobalBounds().height / 2);
 
-    //m_background.setTexture(&getResource().getTexture("harry_potter"));
-    //m_background.setSize(sf::Vector2f(m_background.getTexture()->getSize()));
-    //m_background.setOrigin(m_background.getSize() / 2.0f);
-    //m_background.setPosition(wSize / 2.0f);
+    m_tickSound.setBuffer(getResource().getSoundBuffer("tick"));
+    m_tickSound.setVolume(100);
+
+    m_validateSound.setBuffer(getResource().getSoundBuffer("valid"));
+    m_validateSound.setVolume(100);
+
+    m_invalidSound.setBuffer(getResource().getSoundBuffer("invalid"));
+    m_invalidSound.setVolume(100);
+
+    m_tickSoundTimer = Clock::getInstance().getElapsedTime().asSeconds();
 
     m_scoreValue = 0;
+    m_nbRiddles = 0;
 
     m_score.setFont(getResource().getFont("nathanFont"));
     m_score.setCharacterSize(50);
@@ -45,26 +54,14 @@ RoomScene::RoomScene()
     m_timer.setCharacterSize(50);
     m_timer.setPosition({wSize.x * 0.1, wSize.y * 0.1});
 
-    m_backgroundColor.setSize({1920, 1080});
+    m_backgroundColor.setSize(wSize);
     m_backgroundColor.setFillColor(sf::Color(74, 141, 132,255));
 }
 
 void RoomScene::restart()
 {
-    sf::Vector2f wSize(info::getWindowSize());
-
+    m_scoreValue = 0;
     m_riddles.clear();
-
-    m_riddles.push_back(std::make_unique<ClickRiddle>("What is the name of the main character of Harry Potter?", sf::IntRect(0, 0, 100, 100)));
-    m_riddles.push_back(std::make_unique<ClickRiddle>("What dinosaur has 500 teeth", sf::IntRect(0, 0, 100, 100)));
-
-    for (auto& riddle : m_riddles)
-        riddle->setPosition({wSize.x * 0.5, wSize.y * 0.95});
-
-    m_currentRiddleIndex = 0;
-    m_currentRiddle = std::move(m_riddles[m_currentRiddleIndex]);
-
-    m_score.setString("Score : " + std::to_string(m_scoreValue) + " / " + std::to_string(m_riddles.size()));
 }
 
 RoomScene::~RoomScene()
@@ -79,23 +76,52 @@ void RoomScene::handleEvent(sf::Event& event, sf::RenderWindow& window)
     m_currentRiddle->handleEvent(event, window);
 }
 
+void RoomScene::stop()
+{
+    if (m_music != nullptr) {
+        m_music->stop();
+    }
+}
+
 void RoomScene::update(float dt)
 {
+    float remainingTime = m_currentRiddle->getRemainingTime();
+
     m_currentRiddle->update();
     if (!m_currentRiddle->isDisplaying()) {
-        m_timer.setString("Timer : " + std::to_string((int)m_currentRiddle->getRemainingTime()));
+        m_timer.setString("Timer : " + std::to_string((int)remainingTime));
     }
-    if (m_currentRiddle->isFinished()) {
-        m_scoreValue++;
+    if (m_currentRiddle->isFinished() != 0) {
+        if (m_currentRiddle->isFinished() == 1) {
+            audio::modulatePitch(m_validateSound, 0.95, 1.05);
+            m_validateSound.play();
+            m_scoreValue++;
+        } else {
+            audio::modulatePitch(m_invalidSound, 0.95, 1.05);
+            m_invalidSound.play();
+        }
         m_currentRiddleIndex++;
-        m_score.setString("Score : " + std::to_string(m_scoreValue) + " / " + std::to_string(m_riddles.size()));
-        if (m_riddles.size() >= m_currentRiddleIndex) {
+        m_score.setString("Score : " + std::to_string(m_scoreValue) + " / " + std::to_string(m_nbRiddles));
+        if (m_nbRiddles > m_currentRiddleIndex) {
+            m_timer.setString("Timer : n/a");
             m_currentRiddle = std::move(m_riddles[m_currentRiddleIndex]);
-            m_riddles.erase(m_riddles.begin());
+            if (m_currentRiddle == nullptr) {
+                std::cout << "nullptr" << std::endl;
+                std::cout << m_currentRiddleIndex << std::endl;
+            }
+            remainingTime = m_currentRiddle->getRemainingTime();
         } else if (RoomScene* nextScene = dynamic_cast<RoomScene*>(SceneManager::getInstance().getNextScene().get())) {
             SceneManager::getInstance().nextScene();
         } else {
             SceneManager::getInstance().setCurrentScene("Main Menu");
+        }
+    }
+
+    if (remainingTime > 0 && !m_currentRiddle->isDisplaying()) {
+        if (Clock::getInstance().getElapsedTime().asSeconds() - m_tickSoundTimer > 1) {
+            m_tickSoundTimer = Clock::getInstance().getElapsedTime().asSeconds();
+            audio::modulatePitch(m_tickSound, 0.95, 1.05);
+            m_tickSound.play();
         }
     }
 }

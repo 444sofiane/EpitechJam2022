@@ -22,6 +22,8 @@ Room1::Room1()
     ui::UIText* title = ((ui::UIText*)m_uiElements.at("Title").get());
     title->setString("Room 1");
 
+    m_music = &ResourceManager::getInstance().getMusic("harry_potter");
+
     sf::Vector2f wSize(info::getWindowSize());
 
     m_background.setTexture(&getResource().getTexture("harry_potter"));
@@ -34,18 +36,27 @@ void Room1::restart()
 {
     sf::Vector2f wSize(info::getWindowSize());
 
-    m_riddles.clear();
+    RoomScene::restart();
+
+    m_music->play();
 
     m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
     m_riddles.push_back(std::make_unique<ClickRiddle>("What dinosaur has 500 teeth", sf::IntRect(0, 0, 100, 100)));
+    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
+    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
+    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
+    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
+    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
+
 
     for (auto& riddle : m_riddles)
         riddle->setPosition({wSize.x * 0.5, wSize.y * 0.95});
 
+    m_nbRiddles = m_riddles.size();
     m_currentRiddleIndex = 0;
     m_currentRiddle = std::move(m_riddles[m_currentRiddleIndex]);
 
-    m_score.setString("Score : " + std::to_string(m_scoreValue) + " / " + std::to_string(m_riddles.size()));
+    m_score.setString("Score : " + std::to_string(m_scoreValue) + " / " + std::to_string(m_nbRiddles));
 }
 
 Room1::~Room1()

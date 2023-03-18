@@ -44,6 +44,10 @@ SettingsScene::~SettingsScene()
 {
 }
 
+void SettingsScene::stop()
+{
+}
+
 void SettingsScene::handleEvent(sf::Event& event, sf::RenderWindow& window)
 {
     for (auto& [key, element] : m_uiElements) {

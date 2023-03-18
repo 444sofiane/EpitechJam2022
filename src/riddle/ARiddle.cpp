@@ -13,14 +13,15 @@ namespace jam {
 
     ARiddle::ARiddle(const std::string &question)
     {
-        m_displaySpeed = 0.05f;
+        m_displaySpeed = 0.065f;
         m_displayTime = 0.0f;
         m_totalTime = 30.0f;
         m_remainingTime = m_totalTime;
         m_text = question;
 
         m_isDisplaying = true;
-        m_isFinished = false;
+
+        m_typingSound.setBuffer(getResource().getSoundBuffer("typing"));
 
         m_question.setFont(getResource().getFont("nathanFont"));
         m_question.setString("");
@@ -67,6 +68,13 @@ namespace jam {
     {
         std::string str = m_question.getString();
 
+        if (m_isDisplaying && m_typingSound.getStatus() != sf::Sound::Playing) {
+            m_typingSound.play();
+        }
+
+        if (!m_isDisplaying)
+            m_typingSound.stop();
+
         m_displayTime += getClock().getFrameDt();
         if (m_displayTime >= m_displaySpeed && str.size() < m_text.size()) {
             m_isDisplaying = true;
@@ -83,6 +91,10 @@ namespace jam {
         m_background.setOrigin(m_background.getSize() / 2.0f);
         m_question.setPosition({m_background.getPosition().x,
             m_background.getPosition().y - m_question.getCharacterSize() / 4.0f});
+
+        if (m_remainingTime <= 0.0f) {
+            m_isFinished = -1;
+        }
     }
 
     bool ARiddle::isDisplaying() const
@@ -90,7 +102,7 @@ namespace jam {
         return m_isDisplaying;
     }
 
-    bool ARiddle::isFinished() const
+    int ARiddle::isFinished() const
     {
         return m_isFinished;
     }

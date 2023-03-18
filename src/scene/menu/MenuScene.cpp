@@ -60,6 +60,13 @@ MenuScene::~MenuScene()
 {
 }
 
+void MenuScene::stop()
+{
+    if (m_music != nullptr) {
+        m_music->stop();
+    }
+}
+
 void MenuScene::handleEvent(sf::Event& event, sf::RenderWindow& window)
 {
     for (auto& [key, element] : m_uiElements) {

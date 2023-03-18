@@ -34,6 +34,8 @@ namespace jam {
 
     void SceneManager::setCurrentScene(const std::string& identifier)
     {
+        if (m_currentScene != nullptr)
+            m_currentScene->stop();
         m_currentScene = m_scenes.at(identifier);
         m_currentScene->restart();
     }
@@ -53,6 +55,7 @@ namespace jam {
 
     void SceneManager::nextScene()
     {
+        m_currentScene->stop();
         m_currentSceneIndex++;
         if (m_currentSceneIndex >= m_scenesVector.size())
             m_currentSceneIndex = 0;
