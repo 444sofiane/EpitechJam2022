@@ -39,13 +39,15 @@ void Room1::restart()
 
     RoomScene::restart();
 
-    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
-    //m_riddles.push_back(std::make_unique<ClickRiddle>("What dinosaur has 500 teeth", sf::IntRect(0, 0, 100, 100)));
-    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
-    //m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
-    //m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
-    //m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
-    //m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
+    m_riddles.push_back(std::make_unique<ClickRiddle>("Where is the object that wizards use to fly?", sf::IntRect(730, 713, 120, 40)));
+    m_riddles.push_back(std::make_unique<InputRiddle>("Which house could this room belong to?", "Slytherin"));
+    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the strongest unforgivable spell?", "Avada Kedavra"));
+    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the sport most practiced by wizards?", "Quidditch"));
+    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the train used to get to Hogwarts?", "Hogwarts Express"));
+    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the owl belonging to Harry?", "Hedwig"));
+    m_riddles.push_back(std::make_unique<InputRiddle>("What animal is used to send letters in the wizarding world?", "Owl"));
+    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the famous spell used to levitate an object/person?", "Wingardium Leviosa"));
+    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the most famous prison in the wizarding world located on an island?", "Azkaban"));
 
 
     for (auto& riddle : m_riddles)

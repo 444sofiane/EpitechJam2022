@@ -13,7 +13,7 @@ namespace jam {
 
     ARiddle::ARiddle(const std::string &question)
     {
-        m_displaySpeed = 0.065f;
+        m_displaySpeed = 0.007f;
         m_displayTime = 0.0f;
         m_totalTime = 30.0f;
         m_remainingTime = m_totalTime;

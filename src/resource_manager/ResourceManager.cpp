@@ -34,6 +34,8 @@ namespace jam
 
         loadMusic("harry_potter", "asset/audio/Harry_Potter.ogg");
         loadMusic("menu", "asset/audio/menu_music.ogg");
+        loadMusic("pokemon", "asset/audio/pokemon.ogg");
+        loadMusic("toy_story", "asset/audio/toy_story.ogg");
 
         loadTexture("menu_bg", "asset/texture/menu_bg.png");
         loadTexture("generic_button", "asset/texture/generic_button.png");
