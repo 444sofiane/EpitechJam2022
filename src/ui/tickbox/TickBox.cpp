@@ -26,6 +26,8 @@ namespace jam {
             setOrigin(getGlobalBounds().width * 0.5f, getGlobalBounds().height * 0.5f);
 
             m_callback = [](bool) {};
+
+            m_checked = false;
         }
 
         void TickBox::setCallback(std::function<void(bool)> callback)
@@ -39,7 +41,7 @@ namespace jam {
                 if (m_state == PRESSED && !isClicked(e, window)) {
                     reset();
                     setChecked(!isChecked());
-                    m_callback(isChecked());
+                    m_callback(m_checked);
                     return;
                 } else if (isClicked(e, window)) {
                     setScale(m_baseScale * 0.95f);

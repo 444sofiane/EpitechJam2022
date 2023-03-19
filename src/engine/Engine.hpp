@@ -16,10 +16,10 @@
     namespace jam {
         class Engine {
             public:
-                Engine();
-                ~Engine();
                 void init();
                 void run();
+                void switchFullscreen();
+                static Engine& getInstance();
 
             private:
                 std::unique_ptr<sf::RenderWindow> m_window;
@@ -30,7 +30,7 @@
                 shader::GreyScale m_shader;
 
             private:
-                void switchFullscreen();
+                Engine();
                 void handleEvents();
                 void render();
                 void update();

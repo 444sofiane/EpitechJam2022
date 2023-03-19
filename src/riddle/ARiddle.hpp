@@ -23,6 +23,11 @@ namespace jam {
             virtual void setPosition(float x, float y);
             virtual void setDisplaySpeed(float speed);
 
+            virtual void stopSound();
+            virtual void pauseSound();
+            virtual void resumeSound();
+            virtual bool isSoundPlaying() const;
+
             virtual void handleEvent(const sf::Event& event, sf::RenderWindow& window) = 0;
 
             virtual float getTotalTime() const;

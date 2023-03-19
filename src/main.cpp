@@ -9,7 +9,7 @@
 
 int main(int argc, char **argv)
 {
-    jam::Engine engine;
+    jam::Engine& engine = jam::Engine::getInstance();
 
     engine.init();
     engine.run();

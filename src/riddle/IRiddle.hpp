@@ -32,6 +32,11 @@ namespace jam {
             virtual bool isDisplaying() const = 0;
             virtual int isFinished() const = 0;
 
+            virtual void stopSound() = 0;
+            virtual void pauseSound() = 0;
+            virtual void resumeSound() = 0;
+            virtual bool isSoundPlaying() const = 0;
+
             virtual void render(sf::RenderTarget &window) = 0;
             virtual void update() = 0;
     };

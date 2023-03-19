@@ -18,10 +18,10 @@ namespace jam {
         {
             _left.setTexture(&texture);
             _left.setTextureRect(sf::IntRect(0, 0, texture.getSize().x * 0.5,
-                texture.getSize().y * 0.5));
+                texture.getSize().y));
             _right.setTexture(&texture);
             _right.setTextureRect(sf::IntRect(texture.getSize().x * 0.5, 0,
-                texture.getSize().x * 0.5, texture.getSize().y * 0.5));
+                texture.getSize().x * 0.5, texture.getSize().y));
 
             _sound.setBuffer(getResource().getSoundBuffer("curtain_slide"));
         }

@@ -26,8 +26,10 @@ Engine::Engine()
     Clock::getInstance().setTickRate(60);
 }
 
-Engine::~Engine()
+Engine& Engine::getInstance()
 {
+    static Engine instance;
+    return instance;
 }
 
 void Engine::init()
@@ -62,12 +64,10 @@ void Engine::init()
 void Engine::switchFullscreen()
 {
     m_window->close();
-    if (SETTINGS.getFullscreen()) {
+    if (!SETTINGS.getFullscreen()) {
         m_window->create(sf::VideoMode(WINDOW_SIZE.x, WINDOW_SIZE.y), "Game", sf::Style::Default);
-        SETTINGS.getFullscreen() = false;
     } else {
         m_window->create(sf::VideoMode(WINDOW_SIZE.x, WINDOW_SIZE.y), "Game", sf::Style::Fullscreen);
-        SETTINGS.getFullscreen() = true;
     }
     m_window->setMouseCursorVisible(false);
     m_window->setVerticalSyncEnabled(true);
@@ -82,11 +82,6 @@ void Engine::handleEvents()
                 break;
             case sf::Event::MouseButtonPressed:
                 info::printMousePosition(*m_window.get());
-                break;
-            case sf::Event::KeyPressed:
-                if (m_event.key.code == sf::Keyboard::F11) {
-                    switchFullscreen();
-                }
                 break;
         }
         m_sceneManager.getCurrentScene()->handleEvent(m_event, *m_window);

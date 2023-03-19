@@ -29,8 +29,12 @@ Room4::Room4()
 
     m_background.setTexture(&getResource().getTexture("stranger_things"));
     m_background.setSize(sf::Vector2f(m_background.getTexture()->getSize()));
+    m_background.setScale({1.2f, 1.2f});
     m_background.setOrigin(m_background.getSize() / 2.0f);
     m_background.setPosition(wSize / 2.0f);
+    m_background.move(0, wSize.y * -0.005f);
+
+    m_backgroundColor.setFillColor( sf::Color(40, 20, 20, 255));
 }
 
 void Room4::restart()
@@ -39,13 +43,13 @@ void Room4::restart()
 
     RoomScene::restart();
 
-    m_riddles.push_back(std::make_unique<ClickRiddle>("Click on what is use to communicate with the upside down ?", sf::IntRect(650, 240, 240, 240)));
-    m_riddles.push_back(std::make_unique<InputRiddle>("What the name of the character who is stuck in the upside down ?", "Will"));
+    m_riddles.push_back(std::make_unique<ClickRiddle>("Click on what is used to communicate with the upside down ?", sf::IntRect(600, 215, 260, 235)));
+    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the character who is stuck in the upside down ?", "Will"));
     m_riddles.push_back(std::make_unique<InputRiddle>("Who is the main character ?", "Eleven"));
-    m_riddles.push_back(std::make_unique<InputRiddle>("Why is Eleven chase for ?", "Super-Powers"));
-    m_riddles.push_back(std::make_unique<InputRiddle>("what is the name of the Waffle brand ?", "Eggo"));
-    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the creature from the upside down ??", "Demogorgon"));
-    m_riddles.push_back(std::make_unique<InputRiddle>("Which famous game is played by the kids ?", "Dungeons and Dragons"));
+    m_riddles.push_back(std::make_unique<InputRiddle>("What is the main character chased for ?", "Superpowers"));
+    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the Waffle brand ?", "Eggo"));
+    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the creature from the upside down ?", "Demogorgon"));
+    m_riddles.push_back(std::make_unique<InputRiddle>("Which famous game is played by the kids (full name) ?", "Dungeons and Dragons"));
 
 
     for (auto& riddle : m_riddles)

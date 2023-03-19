@@ -31,6 +31,7 @@ Room1::Room1()
     m_background.setSize(sf::Vector2f(m_background.getTexture()->getSize()));
     m_background.setOrigin(m_background.getSize() / 2.0f);
     m_background.setPosition(wSize / 2.0f);
+    m_background.setScale({1.2f, 1.2f});
 }
 
 void Room1::restart()
@@ -39,7 +40,7 @@ void Room1::restart()
 
     RoomScene::restart();
 
-    m_riddles.push_back(std::make_unique<ClickRiddle>("Where is the object that wizards use to fly?", sf::IntRect(730, 713, 120, 40)));
+    m_riddles.push_back(std::make_unique<ClickRiddle>("Where is the object that wizards use to fly?", sf::IntRect(690, 761, 120, 40)));
     m_riddles.push_back(std::make_unique<InputRiddle>("Which house could this room belong to?", "Slytherin"));
     m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the strongest unforgivable spell?", "Avada Kedavra"));
     m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the sport most practiced by wizards?", "Quidditch"));

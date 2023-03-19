@@ -14,6 +14,7 @@
 #include "info.hpp"
 #include "TickBox.hpp"
 #include "Settings.hpp"
+#include "Engine.hpp"
 
 namespace jam {
 
@@ -54,7 +55,11 @@ SettingsScene::SettingsScene()
     ui::TickBox* fullscreen = ((ui::TickBox*)m_uiElements.at("Fullscreen").get());
     fullscreen->setPosition({wSize.x * 0.4, wSize.y * 0.3});
     fullscreen->setBaseScale(0.2f, 0.2f);
-    fullscreen->setCallback([](bool state) { SETTINGS.getFullscreen() = state; });
+    fullscreen->setCallback([](bool state) {
+        SETTINGS.getFullscreen() = state;
+        std::cout << "Fullscreen: " << state << std::endl;
+        Engine::getInstance().switchFullscreen();
+    });
 
     ui::TickBox* retroMode = ((ui::TickBox*)m_uiElements.at("RetroMode").get());
     retroMode->setPosition({wSize.x * 0.4, wSize.y * 0.4});

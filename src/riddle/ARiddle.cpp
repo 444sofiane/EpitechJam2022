@@ -116,4 +116,24 @@ namespace jam {
     {
         return m_remainingTime;
     }
+
+    void ARiddle::stopSound()
+    {
+        m_typingSound.stop();
+    }
+
+    void ARiddle::pauseSound()
+    {
+        m_typingSound.pause();
+    }
+
+    void ARiddle::resumeSound()
+    {
+        m_typingSound.play();
+    }
+
+    bool ARiddle::isSoundPlaying() const
+    {
+        return m_typingSound.getStatus() == sf::Sound::Playing;
+    }
 }

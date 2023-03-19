@@ -12,6 +12,8 @@
 #include "IRiddle.hpp"
 #include "Curtains.hpp"
 #include "Button.hpp"
+#include "RoomSummary.hpp"
+#include "Pause.hpp"
 
 namespace jam {
 
@@ -35,6 +37,11 @@ namespace jam {
 
             trans::Curtains m_transition;
 
+            RoomSummary m_summaryScene;
+            float m_summaryTimer;
+
+            Pause m_pauseScene;
+
             sf::Music* m_music = nullptr;
 
             sf::Sound m_tickSound;
@@ -47,13 +54,6 @@ namespace jam {
             int m_nbRiddles;
 
             bool m_showSummary = false;
-            sf::RectangleShape m_summaryBackground;
-            ui::Text m_summaryScore;
-            ui::Text m_summaryComment;
-            ui::Button m_summaryNextButton;
-            ui::Button m_summaryRetryButton;
-            ui::Button m_summaryMenuButton;
-            float m_summaryTimer;
 
             std::vector<std::shared_ptr<IRiddle>> m_riddles;
             std::shared_ptr<IRiddle> m_currentRiddle;
