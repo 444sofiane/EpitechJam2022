@@ -36,7 +36,7 @@ namespace jam {
         return m_background;
     }
 
-    ui::UIText &ARiddle::getQuestion()
+    ui::Text &ARiddle::getQuestion()
     {
         return m_question;
     }

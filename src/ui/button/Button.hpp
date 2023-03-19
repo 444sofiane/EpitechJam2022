@@ -27,6 +27,9 @@
                 virtual sf::Vector2f getSize() const override;
                 virtual void render(sf::RenderTarget& target) override;
 
+            private:
+                void reset();
+
             protected:
                 Text m_label;
                 Animation m_animation;

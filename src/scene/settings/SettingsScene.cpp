@@ -17,8 +17,10 @@ namespace jam {
 
 SettingsScene::SettingsScene()
 {
-    m_uiElements["Title"] = std::make_shared<ui::UIText>();
+    m_uiElements["Title"] = std::make_shared<ui::Text>();
     m_uiElements["Back"] = std::make_shared<ui::Button>(getResource().getTexture("generic_button"), "Back");
+
+    m_transition = trans::Curtains(getResource().getTexture("curtains"), sf::Vector2f(1, 0), 1.5f);
 
     sf::Vector2u wSize = info::getWindowSize();
 
@@ -29,7 +31,7 @@ SettingsScene::SettingsScene()
     exitButton->getLabel().setCharacterSize(50);
     exitButton->setFunction([] { SceneManager::getInstance().setCurrentScene("Main Menu"); });
 
-    ui::UIText* title = ((ui::UIText*)m_uiElements.at("Title").get());
+    ui::Text* title = ((ui::Text*)m_uiElements.at("Title").get());
     title->setString("Settings");
     title->setFont(getResource().getFont("nathanFont"));
     title->setCharacterSize(100);
@@ -48,8 +50,15 @@ void SettingsScene::stop()
 {
 }
 
+void SettingsScene::restart()
+{
+    m_transition.restart();
+}
+
 void SettingsScene::handleEvent(sf::Event& event, sf::RenderWindow& window)
 {
+    if (!m_transition.isDone())
+        return;
     for (auto& [key, element] : m_uiElements) {
         element->handleEvent(event, window);
     }
@@ -57,6 +66,10 @@ void SettingsScene::handleEvent(sf::Event& event, sf::RenderWindow& window)
 
 void SettingsScene::update(float dt)
 {
+    if (!m_transition.isDone()) {
+        m_transition.update(dt);
+        return;
+    }
 }
 
 void SettingsScene::render(sf::RenderTarget& target)
@@ -64,6 +77,9 @@ void SettingsScene::render(sf::RenderTarget& target)
     target.draw(m_background);
     for (auto& [key, element] : m_uiElements) {
         element->render(target);
+    }
+    if (!m_transition.isDone()) {
+        m_transition.render(target);
     }
 }
 

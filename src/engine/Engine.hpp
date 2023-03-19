@@ -24,7 +24,7 @@
                 std::unique_ptr<sf::RenderWindow> m_window;
                 sf::Event m_event;
                 SceneManager& m_sceneManager;
-                ui::UIText m_fpsHint;
+                ui::Text m_fpsHint;
 
             private:
                 void handleEvents();

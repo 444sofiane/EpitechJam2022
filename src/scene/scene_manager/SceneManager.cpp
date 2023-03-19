@@ -62,4 +62,14 @@ namespace jam {
         m_currentScene = m_scenesVector.at(m_currentSceneIndex);
         m_currentScene->restart();
     }
+
+    void SceneManager::setCurrentSceneIndex(int index)
+    {
+        m_currentSceneIndex = index;
+    }
+
+    int SceneManager::getCurrentSceneIndex() const
+    {
+        return m_currentSceneIndex;
+    }
 }

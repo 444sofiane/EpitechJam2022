@@ -19,10 +19,11 @@ namespace jam {
 
 Room1::Room1()
 {
-    ui::UIText* title = ((ui::UIText*)m_uiElements.at("Title").get());
+    ui::Text* title = ((ui::Text*)m_uiElements.at("Title").get());
     title->setString("Room 1");
 
     m_music = &ResourceManager::getInstance().getMusic("harry_potter");
+    m_music->setVolume(80);
 
     sf::Vector2f wSize(info::getWindowSize());
 
@@ -38,15 +39,13 @@ void Room1::restart()
 
     RoomScene::restart();
 
-    m_music->play();
-
     m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
-    m_riddles.push_back(std::make_unique<ClickRiddle>("What dinosaur has 500 teeth", sf::IntRect(0, 0, 100, 100)));
+    //m_riddles.push_back(std::make_unique<ClickRiddle>("What dinosaur has 500 teeth", sf::IntRect(0, 0, 100, 100)));
     m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
-    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
-    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
-    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
-    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
+    //m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
+    //m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
+    //m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
+    //m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
 
 
     for (auto& riddle : m_riddles)

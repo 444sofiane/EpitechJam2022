@@ -13,10 +13,10 @@
     namespace jam {
 
     namespace ui {
-        class UIText : public Widget, public Widget::Text {
+        class Text : public Widget, public Widget::Text {
             public:
-                UIText();
-                ~UIText() override;
+                Text();
+                ~Text() override;
                 void handleEvent(sf::Event e, const sf::RenderWindow& window) override;
                 void setPosition(const sf::Vector2f& pos) override;
                 sf::Vector2f getSize() const override;

@@ -43,9 +43,10 @@ void Engine::init()
     m_fpsHint.setOutlineThickness(1);
 
     m_sceneManager.addScene("Main Menu", std::make_shared<MenuScene>());
-    m_sceneManager.addScene("Settings", std::make_shared<SettingsScene>());
     m_sceneManager.addScene("Harry Potter", std::make_shared<Room1>());
+    m_sceneManager.addScene("Settings", std::make_shared<SettingsScene>());
     m_sceneManager.setCurrentScene("Main Menu");
+    m_sceneManager.getCurrentScene()->restart();
 }
 
 void Engine::handleEvents()

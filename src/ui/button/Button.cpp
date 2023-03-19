@@ -41,12 +41,21 @@ void Button::setFunction(std::function<void(void)> func)
     m_function = func;
 }
 
+void Button::reset()
+{
+    m_state = IDLE;
+    setTextureRect(m_animation.getFrame(0));
+    setScale(m_baseScale);
+    m_label.setFillColor(sf::Color(150, 150, 150, 255));
+}
+
 void Button::handleEvent(sf::Event e, const sf::RenderWindow& window)
 {
     if (isHovered(window)) {
         if (m_state == PRESSED && !isClicked(e, window)) {
+            reset();
             m_function();
-            m_state = IDLE;
+            return;
         } else if (isClicked(e, window)) {
             m_state = PRESSED;
             setTextureRect(m_animation.getFrame(2));
@@ -60,10 +69,7 @@ void Button::handleEvent(sf::Event e, const sf::RenderWindow& window)
             m_label.setFillColor(sf::Color::White);
         }
     } else if (m_state != IDLE) {
-        m_state = IDLE;
-        setTextureRect(m_animation.getFrame(0));
-        setScale(m_baseScale);
-        m_label.setFillColor(sf::Color(150, 150, 150, 255));
+        reset();
     }
 }
 

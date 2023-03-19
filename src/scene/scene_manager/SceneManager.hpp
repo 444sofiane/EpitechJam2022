@@ -27,6 +27,9 @@
             void nextScene();
             std::shared_ptr<IScene> getNextScene();
 
+            void setCurrentSceneIndex(int index);
+            int getCurrentSceneIndex() const;
+
         private:
             std::map<std::string, std::shared_ptr<IScene>> m_scenes;
             std::shared_ptr<IScene> m_currentScene;

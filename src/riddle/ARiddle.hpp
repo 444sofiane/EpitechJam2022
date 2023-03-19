@@ -17,7 +17,7 @@ namespace jam {
             virtual ~ARiddle() = default;
 
             virtual sf::RectangleShape &getBackground();
-            virtual ui::UIText &getQuestion();
+            virtual ui::Text &getQuestion();
 
             virtual void setPosition(const sf::Vector2f& position);
             virtual void setPosition(float x, float y);
@@ -36,7 +36,7 @@ namespace jam {
 
         protected:
             sf::RectangleShape m_background;
-            ui::UIText m_question;
+            ui::Text m_question;
             sf::Sound m_typingSound;
             std::string m_text;
             bool m_isDisplaying;

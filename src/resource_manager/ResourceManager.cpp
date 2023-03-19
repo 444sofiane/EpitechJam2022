@@ -27,13 +27,19 @@ namespace jam
         loadSoundBuffer("valid", "asset/audio/valid.ogg");
         loadSoundBuffer("invalid", "asset/audio/invalid.ogg");
         loadSoundBuffer("typing", "asset/audio/typing.ogg");
+        loadSoundBuffer("curtain_slide", "asset/audio/curtain_slide.ogg");
+        loadSoundBuffer("clapping", "asset/audio/clapping.ogg");
+        loadSoundBuffer("meh", "asset/audio/meh.ogg");
+        loadSoundBuffer("lose", "asset/audio/lose.ogg");
 
         loadMusic("harry_potter", "asset/audio/Harry_Potter.ogg");
+        loadMusic("menu", "asset/audio/menu_music.ogg");
 
         loadTexture("menu_bg", "asset/texture/menu_bg.png");
         loadTexture("generic_button", "asset/texture/generic_button.png");
         loadTexturesFromFolder("asset/texture/rooms");
         loadTexture("cursor loupe", "asset/texture/loupe.png");
+        loadTexture("curtains", "asset/texture/curtains.png");
     }
 
     ResourceManager &ResourceManager::getInstance()

@@ -11,30 +11,30 @@ namespace jam {
 
 namespace ui {
 
-UIText::UIText()
+Text::Text()
 {
 }
 
-UIText::~UIText()
+Text::~Text()
 {
 }
 
-void UIText::render(sf::RenderTarget& target)
+void Text::render(sf::RenderTarget& target)
 {
     target.draw(*this);
 }
 
-void UIText::handleEvent(sf::Event e, const sf::RenderWindow& window)
+void Text::handleEvent(sf::Event e, const sf::RenderWindow& window)
 {
 
 }
 
-void UIText::setPosition(const sf::Vector2f& pos)
+void Text::setPosition(const sf::Vector2f& pos)
 {
     sf::Text::setPosition(pos);
 }
 
-sf::Vector2f UIText::getSize() const
+sf::Vector2f Text::getSize() const
 {
     return {getGlobalBounds().width, getGlobalBounds().height};
 }

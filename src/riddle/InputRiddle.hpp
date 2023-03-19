@@ -30,8 +30,8 @@ namespace jam {
             std::string m_question;
             std::string m_answer;
             std::string m_input;
-            ui::UIText m_inputText;
-            ui::UIText m_inputHint;
+            ui::Text m_inputText;
+            ui::Text m_inputHint;
             Rectangle m_inputBox;
             float m_lastBlink;
     };
