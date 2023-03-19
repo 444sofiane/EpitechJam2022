@@ -40,17 +40,15 @@ void Room2::restart()
     RoomScene::restart();
 
     m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the Pokemon on the tv?", "Pikachu"));
-    //m_riddles.push_back(std::make_unique<ClickRiddle>("What dinosaur has 500 teeth", sf::IntRect(0, 0, 100, 100)));
     m_riddles.push_back(std::make_unique<InputRiddle>("Which pokemon type doesn't exist ? Fire, Water, Glass", "Glass"));
-    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the most powerfull pokeball", "Master Ball"));
+    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the most powerful pokeball", "Master Ball"));
     m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character in Pokemon?", "Ash"));
     m_riddles.push_back(std::make_unique<InputRiddle>("What is the pokemon number 001 in the pokedex?", "Bulbasaur"));
-    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the theam trying to get Pikachu?", "Team Rocket"));
-    //m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the main character of Harry Potter?", "Harry Potter"));
+    m_riddles.push_back(std::make_unique<InputRiddle>("What is the name of the team trying to get Pikachu?", "Team Rocket"));
     m_riddles.push_back(std::make_unique<InputRiddle>("In what does Magikarp evolve ?", "Gyarados"));
-    m_riddles.push_back(std::make_unique<InputRiddle>("In his most evolved form, how much head does Diglett have ?", "3"));
+    m_riddles.push_back(std::make_unique<InputRiddle>("In his most evolved form, how many heads does Diglett have ?", "3"));
     m_riddles.push_back(std::make_unique<InputRiddle>("What is the slogan of the Pokemon franchise?", "Gotta catch 'em all"));
-    m_riddles.push_back(std::make_unique<ClickRiddle>("Where are the basic pokeball in the screen", sf::IntRect(1040, 305, 70, 60)));
+    m_riddles.push_back(std::make_unique<ClickRiddle>("Where is the basic pokeball on the screen", sf::IntRect(1040, 305, 70, 60)));
 
 
     for (auto& riddle : m_riddles)

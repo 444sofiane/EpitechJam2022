@@ -33,7 +33,7 @@ namespace jam {
     void ClickRiddle::render(sf::RenderTarget &window)
     {
         ARiddle::render(window);
-        window.draw(m_clickRect);
+        //window.draw(m_clickRect);
     }
 
     void ClickRiddle::update()
