@@ -17,6 +17,7 @@
 #include "Room3.hpp"
 #include "Room4.hpp"
 #include "Settings.hpp"
+#include "Credits.hpp"
 
 namespace jam {
 
@@ -56,6 +57,7 @@ void Engine::init()
     m_sceneManager.addScene("Toy Story", std::make_shared<Room3>());
     m_sceneManager.addScene("Stranger Things", std::make_shared<Room4>());
 
+    m_sceneManager.addScene("Credits", std::make_shared<Credits>());
     m_sceneManager.addScene("Settings", std::make_shared<SettingsScene>());
     m_sceneManager.setCurrentScene("Main Menu");
     m_sceneManager.getCurrentScene()->restart();

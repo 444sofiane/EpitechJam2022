@@ -37,7 +37,7 @@ namespace jam {
             if (RoomScene* nextScene = dynamic_cast<RoomScene*>(SceneManager::getInstance().getNextScene().get())) {
                 SceneManager::getInstance().nextScene();
             } else {
-                SceneManager::getInstance().setCurrentScene("Main Menu");
+                SceneManager::getInstance().setCurrentScene("Credits");
             }
         });
 

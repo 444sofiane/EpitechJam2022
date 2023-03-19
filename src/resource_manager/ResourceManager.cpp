@@ -37,6 +37,7 @@ namespace jam
         loadMusic("pokemon", "asset/audio/pokemon.ogg");
         loadMusic("toy_story", "asset/audio/toy_story.ogg");
         loadMusic("stranger_things", "asset/audio/stranger_things.ogg");
+        loadMusic("credits", "asset/audio/credits.ogg");
 
         loadTexture("menu_bg", "asset/texture/menu_bg.png");
         loadTexture("generic_button", "asset/texture/generic_button.png");
@@ -44,6 +45,7 @@ namespace jam
         loadTexture("cursor loupe", "asset/texture/loupe.png");
         loadTexture("curtains", "asset/texture/curtains.png");
         loadTexture("tick_box", "asset/texture/tickBox.png");
+        loadTexture("credits_bg", "asset/texture/credits_bg.png");
     }
 
     ResourceManager &ResourceManager::getInstance()

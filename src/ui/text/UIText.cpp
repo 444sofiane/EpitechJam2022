@@ -15,6 +15,11 @@ Text::Text()
 {
 }
 
+Text::Text(const std::string& text)
+{
+    setString(text);
+}
+
 Text::~Text()
 {
 }
