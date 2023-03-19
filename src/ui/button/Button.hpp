@@ -10,13 +10,13 @@
 
     #include "Widget.hpp"
     #include "Animation.hpp"
-    #include "Rectangle.hpp"
+    #include "Box.hpp"
     #include <functional>
 
     namespace jam {
 
     namespace ui {
-        class Button : public Widget, public Rectangle {
+        class Button : public Widget, public Box {
             public:
                 enum State { IDLE, HOVERED, PRESSED };
                 Button(const sf::Texture& texture, const std::string& label);

@@ -42,6 +42,7 @@ namespace jam
         loadTexturesFromFolder("asset/texture/rooms");
         loadTexture("cursor loupe", "asset/texture/loupe.png");
         loadTexture("curtains", "asset/texture/curtains.png");
+        loadTexture("tick_box", "asset/texture/tickBox.png");
     }
 
     ResourceManager &ResourceManager::getInstance()

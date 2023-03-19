@@ -9,7 +9,7 @@
     #define AENTITY_HPP_
 
     #include "IEntity.hpp"
-    #include "Rectangle.hpp"
+    #include "Box.hpp"
 
     namespace jam {
         class AEntity : public IEntity {
@@ -46,7 +46,7 @@
                 AEntity();
                 float m_speed = 1;
                 bool m_debug = false;
-                Rectangle m_hitbox;
+                Box m_hitbox;
                 float m_rotation = 0;
                 sf::Vector2f m_hitBoxOffset = {0.f, 0.f};
                 sf::Vector2f m_position = {0.f, 0.f};

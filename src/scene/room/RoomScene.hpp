@@ -9,7 +9,6 @@
 
 #include "IScene.hpp"
 #include "Widget.hpp"
-#include "SatBox.hpp"
 #include "IRiddle.hpp"
 #include "Curtains.hpp"
 #include "Button.hpp"

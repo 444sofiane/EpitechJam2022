@@ -10,7 +10,7 @@
 
     #include "Widget.hpp"
     #include "Animation.hpp"
-    #include "Rectangle.hpp"
+    #include "Box.hpp"
 
     namespace jam {
 
@@ -39,9 +39,9 @@
                 Orientation m_orientation;
                 Animation m_animation;
                 State m_state;
-                Rectangle m_internRail;
-                Rectangle m_outerRail;
-                Rectangle m_wagon;
+                Box m_internRail;
+                Box m_outerRail;
+                Box m_wagon;
         };
     }
 

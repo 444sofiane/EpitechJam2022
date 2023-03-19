@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** Jam
 ** File description:
-** Rectangle
+** Box
 */
 
 #ifndef RECTANGLE_HPP_
@@ -11,7 +11,7 @@
     #include "common.hpp"
 
     namespace jam {
-        class Rectangle : public sf::RectangleShape
+        class Box : public sf::RectangleShape
         {
         public:
             bool isHovered(const sf::RenderWindow &window) const;

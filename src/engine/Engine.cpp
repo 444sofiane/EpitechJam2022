@@ -15,6 +15,7 @@
 #include "Room1.hpp"
 #include "Room2.hpp"
 #include "Room3.hpp"
+#include "Settings.hpp"
 
 namespace jam {
 
@@ -35,6 +36,8 @@ void Engine::init()
 
     m_window->setMouseCursorVisible(false);
 
+    m_renderTexture.create(WINDOW_SIZE.x, WINDOW_SIZE.y);
+
     Cursor::getInstance()->setTexture(ResourceManager::getInstance().getTexture("cursor loupe"));
 
     m_window->setVerticalSyncEnabled(true);
@@ -53,6 +56,20 @@ void Engine::init()
     m_sceneManager.getCurrentScene()->restart();
 }
 
+void Engine::switchFullscreen()
+{
+    m_window->close();
+    if (SETTINGS.getFullscreen()) {
+        m_window->create(sf::VideoMode(WINDOW_SIZE.x, WINDOW_SIZE.y), "Game", sf::Style::Default);
+        SETTINGS.getFullscreen() = false;
+    } else {
+        m_window->create(sf::VideoMode(WINDOW_SIZE.x, WINDOW_SIZE.y), "Game", sf::Style::Fullscreen);
+        SETTINGS.getFullscreen() = true;
+    }
+    m_window->setMouseCursorVisible(false);
+    m_window->setVerticalSyncEnabled(true);
+}
+
 void Engine::handleEvents()
 {
     while (m_window->pollEvent(m_event)) {
@@ -65,16 +82,7 @@ void Engine::handleEvents()
                 break;
             case sf::Event::KeyPressed:
                 if (m_event.key.code == sf::Keyboard::F11) {
-                    m_window->close();
-                    if (m_fullscreen) {
-                        m_window->create(sf::VideoMode(WINDOW_SIZE.x, WINDOW_SIZE.y), "Game", sf::Style::Default);
-                        m_fullscreen = false;
-                    } else {
-                        m_window->create(sf::VideoMode(WINDOW_SIZE.x, WINDOW_SIZE.y), "Game", sf::Style::Fullscreen);
-                        m_fullscreen = true;
-                    }
-                    m_window->setMouseCursorVisible(false);
-                    m_window->setVerticalSyncEnabled(true);
+                    switchFullscreen();
                 }
                 break;
         }
@@ -85,9 +93,16 @@ void Engine::handleEvents()
 void Engine::render()
 {
     m_window->clear();
-    m_sceneManager.getCurrentScene()->render(*m_window.get());
+    m_renderTexture.clear();
+    m_sceneManager.getCurrentScene()->render(m_renderTexture);
     //m_window->draw(m_fpsHint);
-    Cursor::getInstance()->render(*m_window);
+    Cursor::getInstance()->render(m_renderTexture);
+    m_renderTexture.display();
+
+    if (SETTINGS.getRetro())
+        m_window->draw(m_shader.apply(m_renderTexture));
+    else
+        m_window->draw(sf::Sprite(m_renderTexture.getTexture()));
     m_window->display();
 }
 

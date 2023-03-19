@@ -2,12 +2,12 @@
 ** EPITECH PROJECT, 2023
 ** Jam
 ** File description:
-** ERectangle
+** Box
 */
 
-#include "Rectangle.hpp"
+#include "Box.hpp"
 
-bool jam::Rectangle::isHovered(const sf::RenderWindow& window) const
+bool jam::Box::isHovered(const sf::RenderWindow& window) const
 {
     sf::Vector2i mouse_pos0 = sf::Mouse::getPosition(window);
     sf::Vector2f mouse_pos;
@@ -16,7 +16,7 @@ bool jam::Rectangle::isHovered(const sf::RenderWindow& window) const
     return getGlobalBounds().contains((float)mouse_pos.x, (float)mouse_pos.y);
 }
 
-bool jam::Rectangle::isClicked(sf::Event e, const sf::RenderWindow& window)
+bool jam::Box::isClicked(sf::Event e, const sf::RenderWindow& window)
 {
     if (isHovered(window)) {
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
@@ -26,19 +26,19 @@ bool jam::Rectangle::isClicked(sf::Event e, const sf::RenderWindow& window)
     return false;
 }
 
-void jam::Rectangle::setBaseScale(sf::Vector2f scale)
+void jam::Box::setBaseScale(sf::Vector2f scale)
 {
     this->setScale(scale);
     m_baseScale = scale;
 }
 
-void jam::Rectangle::setBaseScale(float x, float y)
+void jam::Box::setBaseScale(float x, float y)
 {
     this->setScale(x, y);
     m_baseScale = {x, y};
 }
 
-sf::Vector2f jam::Rectangle::getBaseScale() const
+sf::Vector2f jam::Box::getBaseScale() const
 {
     return m_baseScale;
 }

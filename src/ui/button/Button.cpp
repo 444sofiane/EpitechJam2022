@@ -22,7 +22,7 @@ Button::Button(const sf::Texture& texture, const std::string& label)
     m_animation.addFrame(2, sf::seconds(0.5));
     setTextureRect(m_animation.getFrame(0));
 
-    Rectangle::setSize(sf::Vector2f(texture.getSize().x / 3, texture.getSize().y));
+    Box::setSize(sf::Vector2f(texture.getSize().x / 3, texture.getSize().y));
     setOrigin(getGlobalBounds().width * 0.5f, getGlobalBounds().height * 0.5f);
     m_label.setString(label);
     m_label.setFont(getResource().getFont("gameFont"));
@@ -75,13 +75,13 @@ void Button::handleEvent(sf::Event e, const sf::RenderWindow& window)
 
 void Button::setPosition(const sf::Vector2f& pos)
 {
-    Rectangle::setPosition(pos);
+    Box::setPosition(pos);
     m_label.setPosition(pos);
 }
 
 sf::Vector2f Button::getSize() const
 {
-    return Rectangle::getSize();
+    return Box::getSize();
 }
 
 void Button::render(sf::RenderTarget& target)

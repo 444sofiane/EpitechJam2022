@@ -11,6 +11,7 @@
     #include "common.hpp"
     #include "UIText.hpp"
     #include "SceneManager.hpp"
+    #include "GreyScale.hpp"
 
     namespace jam {
         class Engine {
@@ -22,12 +23,14 @@
 
             private:
                 std::unique_ptr<sf::RenderWindow> m_window;
+                sf::RenderTexture m_renderTexture;
                 sf::Event m_event;
                 SceneManager& m_sceneManager;
                 ui::Text m_fpsHint;
-                bool m_fullscreen = false;
+                shader::GreyScale m_shader;
 
             private:
+                void switchFullscreen();
                 void handleEvents();
                 void render();
                 void update();

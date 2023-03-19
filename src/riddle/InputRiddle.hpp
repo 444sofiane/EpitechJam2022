@@ -8,7 +8,7 @@
 #pragma once
 
 #include "ARiddle.hpp"
-#include "Rectangle.hpp"
+#include "Box.hpp"
 
 namespace jam {
 
@@ -32,7 +32,7 @@ namespace jam {
             std::string m_input;
             ui::Text m_inputText;
             ui::Text m_inputHint;
-            Rectangle m_inputBox;
+            Box m_inputBox;
             float m_lastBlink;
     };
 

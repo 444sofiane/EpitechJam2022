@@ -12,17 +12,37 @@
 #include "ResourceManager.hpp"
 #include "SceneManager.hpp"
 #include "info.hpp"
+#include "TickBox.hpp"
+#include "Settings.hpp"
 
 namespace jam {
 
 SettingsScene::SettingsScene()
 {
     m_uiElements["Title"] = std::make_shared<ui::Text>();
+    m_uiElements["Fullscreen"] = std::make_shared<ui::TickBox>(getResource().getTexture("tick_box"));
+    m_uiElements["RetroMode"] = std::make_shared<ui::TickBox>(getResource().getTexture("tick_box"));
     m_uiElements["Back"] = std::make_shared<ui::Button>(getResource().getTexture("generic_button"), "Back");
+    m_uiElements["FullscreenText"] = std::make_shared<ui::Text>();
+    m_uiElements["RetroModeText"] = std::make_shared<ui::Text>();
 
     m_transition = trans::Curtains(getResource().getTexture("curtains"), sf::Vector2f(1, 0), 1.5f);
 
     sf::Vector2u wSize = info::getWindowSize();
+
+    ui::Text* fullscreenText = ((ui::Text*)m_uiElements.at("FullscreenText").get());
+    fullscreenText->setString("Toggle Fullscreen");
+    fullscreenText->setFont(getResource().getFont("nathanFont"));
+    fullscreenText->setCharacterSize(50);
+    fullscreenText->setPosition({wSize.x * 0.5, wSize.y * 0.29});
+    fullscreenText->setOrigin(fullscreenText->getGlobalBounds().width / 2, fullscreenText->getGlobalBounds().height / 2);
+
+    ui::Text* retroModeText = ((ui::Text*)m_uiElements.at("RetroModeText").get());
+    retroModeText->setString("Retro Mode");
+    retroModeText->setFont(getResource().getFont("nathanFont"));
+    retroModeText->setCharacterSize(50);
+    retroModeText->setPosition({wSize.x * 0.5, wSize.y * 0.39});
+    retroModeText->setOrigin(retroModeText->getGlobalBounds().width / 2, retroModeText->getGlobalBounds().height / 2);
 
     ui::Button* exitButton = ((ui::Button*)m_uiElements.at("Back").get());
     exitButton->setPosition({wSize.x * 0.5, wSize.y * 0.55});
@@ -30,6 +50,16 @@ SettingsScene::SettingsScene()
     exitButton->getLabel().setFont(getResource().getFont("nathanFont"));
     exitButton->getLabel().setCharacterSize(50);
     exitButton->setFunction([] { SceneManager::getInstance().setCurrentScene("Main Menu"); });
+
+    ui::TickBox* fullscreen = ((ui::TickBox*)m_uiElements.at("Fullscreen").get());
+    fullscreen->setPosition({wSize.x * 0.4, wSize.y * 0.3});
+    fullscreen->setBaseScale(0.2f, 0.2f);
+    fullscreen->setCallback([](bool state) { SETTINGS.getFullscreen() = state; });
+
+    ui::TickBox* retroMode = ((ui::TickBox*)m_uiElements.at("RetroMode").get());
+    retroMode->setPosition({wSize.x * 0.4, wSize.y * 0.4});
+    retroMode->setBaseScale(0.2f, 0.2f);
+    retroMode->setCallback([](bool state) { SETTINGS.getRetro() = state; });
 
     ui::Text* title = ((ui::Text*)m_uiElements.at("Title").get());
     title->setString("Settings");
