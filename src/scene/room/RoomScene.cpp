@@ -61,6 +61,8 @@ RoomScene::RoomScene()
     title->setCharacterSize(100);
     title->setPosition({wSize.x * 0.5, wSize.y * 0.02});
     title->setOrigin(title->getGlobalBounds().width / 2, title->getGlobalBounds().height / 2);
+    title->setOutlineColor(sf::Color::Black);
+    title->setOutlineThickness(2);
 
     m_mehSound.setBuffer(getResource().getSoundBuffer("meh"));
     m_mehSound.setVolume(100);
@@ -88,11 +90,15 @@ RoomScene::RoomScene()
     m_score.setFont(getResource().getFont("nathanFont"));
     m_score.setCharacterSize(50);
     m_score.setPosition({wSize.x * 0.8, wSize.y * 0.1});
+    m_score.setOutlineColor(sf::Color::Black);
+    m_score.setOutlineThickness(2);
 
     m_timer.setString("Timer : n/a");
     m_timer.setFont(getResource().getFont("nathanFont"));
     m_timer.setCharacterSize(50);
     m_timer.setPosition({wSize.x * 0.1, wSize.y * 0.1});
+    m_timer.setOutlineColor(sf::Color::Black);
+    m_timer.setOutlineThickness(2);
 
     m_backgroundColor.setSize(wSize);
     m_backgroundColor.setFillColor(sf::Color(74, 141, 132, 255));
