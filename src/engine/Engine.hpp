@@ -25,6 +25,7 @@
                 sf::Event m_event;
                 SceneManager& m_sceneManager;
                 ui::Text m_fpsHint;
+                bool m_fullscreen = false;
 
             private:
                 void handleEvents();

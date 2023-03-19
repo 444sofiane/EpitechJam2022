@@ -184,6 +184,8 @@ void RoomScene::update(float dt)
 
             playEndSound();
 
+            m_timer.setString("Timer : n/a");
+
             std::stringstream stream;
             stream << std::fixed << std::setprecision(2) << m_totalTime;
             std::string time = stream.str();

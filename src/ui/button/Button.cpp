@@ -89,6 +89,7 @@ void Button::render(sf::RenderTarget& target)
     //target.draw(*this);
     m_label.setOrigin(m_label.getGlobalBounds().width / 2,
     m_label.getGlobalBounds().height / 2);
+    m_label.setPosition({getPosition().x, getPosition().y - m_label.getGlobalBounds().height / 2});
     target.draw(m_label);
 }
 

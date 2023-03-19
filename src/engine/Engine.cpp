@@ -59,6 +59,20 @@ void Engine::handleEvents()
             case sf::Event::MouseButtonPressed:
                 info::printMousePosition(*m_window.get());
                 break;
+            case sf::Event::KeyPressed:
+                if (m_event.key.code == sf::Keyboard::F11) {
+                    m_window->close();
+                    if (m_fullscreen) {
+                        m_window->create(sf::VideoMode(WINDOW_SIZE.x, WINDOW_SIZE.y), "Game", sf::Style::Default);
+                        m_fullscreen = false;
+                    } else {
+                        m_window->create(sf::VideoMode(WINDOW_SIZE.x, WINDOW_SIZE.y), "Game", sf::Style::Fullscreen);
+                        m_fullscreen = true;
+                    }
+                    m_window->setMouseCursorVisible(false);
+                    m_window->setVerticalSyncEnabled(true);
+                }
+                break;
         }
         m_sceneManager.getCurrentScene()->handleEvent(m_event, *m_window);
     }
