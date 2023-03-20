@@ -92,7 +92,7 @@ namespace jam {
         m_transition.restart();
 
         int i = 0;
-        int skipped = 0;
+        int skipped = -1;
         for (auto it = m_scenesRef.begin(); it != m_scenesRef.end(); ++it)
         {
             auto& name = it->first;
