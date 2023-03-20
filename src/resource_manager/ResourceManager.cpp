@@ -46,6 +46,7 @@ namespace jam
         loadTexture("curtains", "asset/texture/curtains.png");
         loadTexture("tick_box", "asset/texture/tickBox.png");
         loadTexture("credits_bg", "asset/texture/credits_bg.png");
+        loadTexture("monty_python", "asset/texture/monty_python.jpg");
     }
 
     ResourceManager &ResourceManager::getInstance()

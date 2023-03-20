@@ -21,11 +21,13 @@
             void addScene(const std::string& identifier, std::shared_ptr<IScene> scene);
             std::shared_ptr<IScene> at(const std::string& identifier);
 
-            void setCurrentScene(const std::string& identifier);
+            void setCurrentScene(const std::string& identifier, bool stopPrevious = true);
             std::shared_ptr<IScene> getCurrentScene();
 
-            void nextScene();
+            void nextScene(bool stopPrevious = true);
             std::shared_ptr<IScene> getNextScene();
+
+            std::map<std::string, std::shared_ptr<IScene>>& getScenes();
 
             void setCurrentSceneIndex(int index);
             int getCurrentSceneIndex() const;

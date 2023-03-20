@@ -54,13 +54,17 @@ namespace jam {
         m_summaryBackground.setOutlineColor(sf::Color::Black);
         m_summaryBackground.setOutlineThickness(4);
 
-        m_summaryScore.setFont(getResource().getFont("nathanFont"));
-        m_summaryScore.setCharacterSize(50);
-        m_summaryScore.setPosition({wSize.x * 0.5, wSize.y * 0.4});
-
         m_summaryComment.setFont(getResource().getFont("nathanFont"));
         m_summaryComment.setCharacterSize(50);
-        m_summaryComment.setPosition({wSize.x * 0.5, wSize.y * 0.3});
+        m_summaryComment.setPosition({wSize.x * 0.5, wSize.y * 0.25});
+
+        m_summaryScore.setFont(getResource().getFont("nathanFont"));
+        m_summaryScore.setCharacterSize(50);
+        m_summaryScore.setPosition({wSize.x * 0.5, wSize.y * 0.35});
+
+        m_summaryPreviousBest.setFont(getResource().getFont("nathanFont"));
+        m_summaryPreviousBest.setCharacterSize(50);
+        m_summaryPreviousBest.setPosition({wSize.x * 0.5, wSize.y * 0.4});
     }
 
     void RoomSummary::restart()
@@ -84,9 +88,13 @@ namespace jam {
         m_summaryComment.setOrigin(m_summaryComment.getGlobalBounds().width / 2,
             m_summaryComment.getGlobalBounds().height / 2);
 
-        m_summaryScore.setString("Score : " + std::to_string(m_scoreValue) + " / " + std::to_string(m_nbRiddles));
+        m_summaryScore.setString("Score : " + std::to_string(m_scoreValue));
         m_summaryScore.setOrigin(m_summaryScore.getGlobalBounds().width / 2,
             m_summaryScore.getGlobalBounds().height / 2);
+
+        m_summaryPreviousBest.setString("Previous best : " + std::to_string(m_previousBest));
+        m_summaryPreviousBest.setOrigin(m_summaryPreviousBest.getGlobalBounds().width / 2,
+            m_summaryPreviousBest.getGlobalBounds().height / 2);
 
     }
 
@@ -96,8 +104,14 @@ namespace jam {
         m_summaryMenuButton.render(target);
         m_summaryNextButton.render(target);
         m_summaryRetryButton.render(target);
+        target.draw(m_summaryPreviousBest);
         target.draw(m_summaryComment);
         target.draw(m_summaryScore);
+    }
+
+    void RoomSummary::setPreviousBest(int score)
+    {
+        m_previousBest = score;
     }
 
     void RoomSummary::stop()

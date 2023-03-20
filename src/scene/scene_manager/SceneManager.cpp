@@ -32,9 +32,9 @@ namespace jam {
         m_scenesVector.push_back(scene);
     }
 
-    void SceneManager::setCurrentScene(const std::string& identifier)
+    void SceneManager::setCurrentScene(const std::string& identifier, bool stopPrevious)
     {
-        if (m_currentScene != nullptr)
+        if (m_currentScene != nullptr && stopPrevious)
             m_currentScene->stop();
         m_currentScene = m_scenes.at(identifier);
         m_currentScene->restart();
@@ -45,6 +45,11 @@ namespace jam {
         return m_currentScene;
     }
 
+    std::map<std::string, std::shared_ptr<IScene>>& SceneManager::getScenes()
+    {
+        return m_scenes;
+    }
+
     std::shared_ptr<IScene> SceneManager::getNextScene()
     {
         int nextSceneIndex = m_currentSceneIndex + 1;
@@ -53,9 +58,10 @@ namespace jam {
         return m_scenesVector.at(nextSceneIndex);
     }
 
-    void SceneManager::nextScene()
+    void SceneManager::nextScene(bool stopPrevious)
     {
-        m_currentScene->stop();
+        if (m_currentScene != nullptr && stopPrevious)
+            m_currentScene->stop();
         m_currentSceneIndex++;
         if (m_currentSceneIndex >= m_scenesVector.size())
             m_currentSceneIndex = 0;

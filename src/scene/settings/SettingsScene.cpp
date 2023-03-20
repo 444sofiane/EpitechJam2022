@@ -75,6 +75,14 @@ SettingsScene::SettingsScene()
 
     m_background.setSize({1920, 1080});
     m_background.setTexture(&getResource().getTexture("menu_bg"));
+
+    m_poster.setTexture(&getResource().getTexture("monty_python"));
+    m_poster.setSize(sf::Vector2f(m_poster.getTexture()->getSize()));
+    m_poster.setOrigin(m_poster.getSize() * 0.5f);
+    m_poster.setPosition({wSize.x * 0.08, wSize.y * 0.45});
+    m_poster.setScale(0.4f, 0.4f);
+    m_poster.setRotation(-5);
+    m_poster.setFillColor(sf::Color(100, 100, 100, 255));
 }
 
 SettingsScene::~SettingsScene()
@@ -110,6 +118,7 @@ void SettingsScene::update(float dt)
 void SettingsScene::render(sf::RenderTarget& target)
 {
     target.draw(m_background);
+    target.draw(m_poster);
     for (auto& [key, element] : m_uiElements) {
         element->render(target);
     }

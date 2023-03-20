@@ -12,6 +12,12 @@ namespace jam {
 
 namespace ui {
 
+Button::Button(const Button& other)
+: Widget(other), Box(other), m_label(other.m_label),
+m_animation(other.m_animation), m_state(other.m_state), m_function(other.m_function)
+{
+}
+
 Button::Button(const sf::Texture& texture, const std::string& label)
 : m_animation(texture.getSize().x / 3, texture.getSize().y)
 {

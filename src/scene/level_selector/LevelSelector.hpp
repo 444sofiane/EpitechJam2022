@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** EpitechJam2022
 ** File description:
-** Credits
+** LevelSelector
 */
 
 #pragma once
@@ -10,29 +10,23 @@
 #include "IScene.hpp"
 #include "Widget.hpp"
 #include "Curtains.hpp"
-#include "UIText.hpp"
 
 namespace jam {
-
-    class Credits : public IScene {
+    class LevelSelector : public IScene {
         public:
-            Credits();
-            ~Credits() override = default;
+            LevelSelector();
+            ~LevelSelector() override;
             void handleEvent(sf::Event& event, sf::RenderWindow& window) override;
             void update(float dt) override;
             void render(sf::RenderTarget& target) override;
             void restart() override;
             void stop() override;
 
-        private:
-            int getTotalBest();
-
-        private:
+        protected:
             std::map<std::string, std::shared_ptr<ui::Widget>> m_uiElements;
-            sf::RectangleShape m_backgroundColor;
+            std::map<std::string, std::shared_ptr<IScene>>& m_scenesRef;
             sf::RectangleShape m_background;
-            std::vector<std::unique_ptr<sf::Text>> m_credits;
-            sf::Music* m_music = nullptr;
             trans::Curtains m_transition;
+            sf::Music* m_music = nullptr;
     };
 }

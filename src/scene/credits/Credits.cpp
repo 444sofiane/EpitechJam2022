@@ -10,6 +10,7 @@
 #include "ResourceManager.hpp"
 #include "SceneManager.hpp"
 #include "Button.hpp"
+#include "RoomScene.hpp"
 
 namespace jam {
 
@@ -36,7 +37,11 @@ namespace jam {
 
         m_credits.push_back(std::make_unique<ui::Text>("Credits"));
         m_credits.push_back(std::make_unique<ui::Text>(""));
+        m_credits.push_back(std::make_unique<ui::Text>(""));
+        m_credits.push_back(std::make_unique<ui::Text>(""));
+        m_credits.push_back(std::make_unique<ui::Text>(""));
         m_credits.push_back(std::make_unique<ui::Text>("Thanks for playing our game!"));
+        m_credits.push_back(std::make_unique<ui::Text>(""));
         m_credits.push_back(std::make_unique<ui::Text>(""));
         m_credits.push_back(std::make_unique<ui::Text>("-Programmers-"));
         m_credits.push_back(std::make_unique<ui::Text>("Aurelien Lamberger"));
@@ -206,6 +211,18 @@ namespace jam {
         m_music = &getResource().getMusic("credits");
     }
 
+    int Credits::getTotalBest()
+    {
+        int total = 0;
+        for (auto& [key, scene] : SceneManager::getInstance().getScenes()) {
+            if (dynamic_cast<RoomScene*>(scene.get()) == nullptr) {
+                continue;
+            }
+            total += dynamic_cast<RoomScene*>(scene.get())->getBest();
+        }
+        return total;
+    }
+
     void Credits::handleEvent(sf::Event& event, sf::RenderWindow& window)
     {
         if (!m_transition.isDone())
@@ -258,8 +275,9 @@ namespace jam {
             line->setPosition({info::getWindowSize().x * 0.5, info::getWindowSize().y * 0.9 + i * line->getCharacterSize() * 1.5});
             i++;
         }
+        m_credits.at(3)->setString("Total best score: " + std::to_string(getTotalBest()));
+        m_credits.at(3)->setOrigin(m_credits.at(3)->getGlobalBounds().width / 2, m_credits.at(3)->getGlobalBounds().height / 2);
     }
-
     void Credits::stop()
     {
         m_music->stop();

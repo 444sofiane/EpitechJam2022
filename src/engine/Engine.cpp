@@ -18,6 +18,7 @@
 #include "Room4.hpp"
 #include "Settings.hpp"
 #include "Credits.hpp"
+#include "LevelSelector.hpp"
 
 namespace jam {
 
@@ -52,10 +53,11 @@ void Engine::init()
     m_fpsHint.setOutlineThickness(1);
 
     m_sceneManager.addScene("Main Menu", std::make_shared<MenuScene>());
-    m_sceneManager.addScene("Harry Potter", std::make_shared<Room1>());
-    m_sceneManager.addScene("Pokemon", std::make_shared<Room2>());
-    m_sceneManager.addScene("Toy Story", std::make_shared<Room3>());
-    m_sceneManager.addScene("Stranger Things", std::make_shared<Room4>());
+    m_sceneManager.addScene("Level Selector", std::make_shared<LevelSelector>());
+    m_sceneManager.addScene("Room 1", std::make_shared<Room1>());
+    m_sceneManager.addScene("Room 2", std::make_shared<Room2>());
+    m_sceneManager.addScene("Room 3", std::make_shared<Room3>());
+    m_sceneManager.addScene("Room 4", std::make_shared<Room4>());
 
     m_sceneManager.addScene("Credits", std::make_shared<Credits>());
     m_sceneManager.addScene("Settings", std::make_shared<SettingsScene>());

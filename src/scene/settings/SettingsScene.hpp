@@ -26,6 +26,7 @@
         protected:
             std::unordered_map<std::string, std::shared_ptr<ui::Widget>> m_uiElements;
             sf::RectangleShape m_background;
+            sf::RectangleShape m_poster;
             trans::Curtains m_transition;
     };
 

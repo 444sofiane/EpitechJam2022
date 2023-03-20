@@ -29,14 +29,14 @@ MenuScene::MenuScene()
     playButton->getLabel().setFont((getResource().getFont("nathanFont")));
     playButton->setBaseScale(3.0f, 3.0f);
     playButton->getLabel().setCharacterSize(50);
-    playButton->setFunction([] { SceneManager::getInstance().nextScene(); });
+    playButton->setFunction([] { SceneManager::getInstance().nextScene(false); });
 
     ui::Button* settingsButton = ((ui::Button*)m_uiElements.at("Settings").get());
     settingsButton->setPosition({wSize.x * 0.5, wSize.y * 0.40});
     settingsButton->getLabel().setFont((getResource().getFont("nathanFont")));
     settingsButton->setBaseScale(3.0f, 3.0f);
     settingsButton->getLabel().setCharacterSize(50);
-    settingsButton->setFunction([] { SceneManager::getInstance().setCurrentScene("Settings"); });
+    settingsButton->setFunction([] { SceneManager::getInstance().setCurrentScene("Settings", false); });
 
     ui::Button* exitButton = ((ui::Button*)m_uiElements.at("Exit").get());
     exitButton->getLabel().setFont(getResource().getFont("nathanFont"));

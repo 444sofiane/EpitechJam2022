@@ -55,7 +55,7 @@ void Room3::restart()
     m_currentRiddleIndex = 0;
     m_currentRiddle = std::move(m_riddles[m_currentRiddleIndex]);
 
-    m_score.setString("Score : " + std::to_string(m_scoreValue) + " / " + std::to_string(m_nbRiddles));
+    m_score.setString("Score : " + std::to_string(m_goodAnswers) + " / " + std::to_string(m_nbRiddles));
 }
 
 Room3::~Room3()

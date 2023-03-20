@@ -17,6 +17,8 @@
 #include "Clock.hpp"
 #include <sstream>
 #include <iomanip>
+#include <filesystem>
+#include <fstream>
 
 namespace jam {
 
@@ -57,7 +59,7 @@ RoomScene::RoomScene()
 
     m_tickSoundTimer = Clock::getInstance().getElapsedTime().asSeconds();
 
-    m_scoreValue = 0;
+    m_goodAnswers = 0;
     m_nbRiddles = 0;
 
     m_score.setFont(getResource().getFont("nathanFont"));
@@ -77,9 +79,21 @@ RoomScene::RoomScene()
     m_backgroundColor.setFillColor(sf::Color(74, 141, 132, 255));
 }
 
+int RoomScene::getBest()
+{
+    std::ifstream file("scores/" + getRegisterName() + ".txt");
+
+    int best = 0;
+    if (file.is_open()) {
+        file >> best;
+        file.close();
+    }
+    return best;
+}
+
 void RoomScene::restart()
 {
-    m_scoreValue = 0;
+    m_goodAnswers = 0;
     m_totalTime = 0;
     m_showSummary = false;
     m_riddles.clear();
@@ -136,7 +150,7 @@ void RoomScene::stop()
 
 void RoomScene::playEndSound()
 {
-    float scorePercent = (float)m_scoreValue / (float)m_nbRiddles;
+    float scorePercent = (float)m_goodAnswers / (float)m_nbRiddles;
 
     if (scorePercent >= 0.7) {
         m_successSound.play();
@@ -171,6 +185,9 @@ void RoomScene::update(float dt)
                 m_showSummary = true;
                 m_timer.setString("Timer : n/a");
                 playEndSound();
+                m_scoreValue *= m_goodAnswers;
+                saveScore();
+                m_summaryScene.setPreviousBest(m_previousBest);
                 m_summaryScene.setNbRiddles(m_nbRiddles);
                 m_summaryScene.setScore(m_scoreValue);
                 m_summaryScene.setTotalTime(m_totalTime);
@@ -190,13 +207,14 @@ void RoomScene::update(float dt)
         if (m_currentRiddle->isFinished() == 1) {
             audio::modulatePitch(m_validateSound, 0.95, 1.05);
             m_validateSound.play();
-            m_scoreValue++;
+            m_goodAnswers++;
+            m_scoreValue += remainingTime;
         } else {
             audio::modulatePitch(m_invalidSound, 0.95, 1.05);
             m_invalidSound.play();
         }
         m_currentRiddleIndex++;
-        m_score.setString("Score : " + std::to_string(m_scoreValue) + " / " + std::to_string(m_nbRiddles));
+        m_score.setString("Score : " + std::to_string(m_goodAnswers) + " / " + std::to_string(m_nbRiddles));
         if (m_nbRiddles > m_currentRiddleIndex) {
             m_timer.setString("Timer : n/a");
             m_currentRiddle = std::move(m_riddles[m_currentRiddleIndex]);
@@ -241,6 +259,41 @@ void RoomScene::render(sf::RenderTarget& target)
 
     if (!m_transition.isDone())
         m_transition.render(target);
+}
+
+void RoomScene::saveScore()
+{
+    std::string path = "scores/" + getRegisterName() + ".txt";
+
+    if (!std::filesystem::exists(path)) {
+        std::ofstream file(path, std::ios::out | std::ios::trunc);
+        file << m_scoreValue << std::endl;
+        file.close();
+    } else {
+        std::ifstream t(path);
+        std::stringstream buffer;
+
+        buffer << t.rdbuf();
+        m_previousBest = std::stoi(buffer.str());
+        t.close();
+        if (m_scoreValue > m_previousBest) {
+            std::ofstream file(path, std::ios::out | std::ios::trunc);
+            file << m_scoreValue << std::endl;
+            file.close();
+            m_previousBest = m_scoreValue;
+        }
+    }
+}
+
+std::string RoomScene::getRegisterName() const
+{
+    auto& scenes = SceneManager::getInstance().getScenes();
+
+    for (auto& [key, scene] : scenes) {
+        if (scene.get() == this) {
+            return key;
+        }
+    }
 }
 
 }

@@ -26,9 +26,12 @@ namespace jam {
             virtual void render(sf::RenderTarget& target) override;
             virtual void restart() override;
             virtual void stop() override;
+            virtual int getBest();
 
         private:
             void playEndSound();
+            void saveScore();
+            std::string getRegisterName() const;
 
         protected:
             std::unordered_map<std::string, std::shared_ptr<ui::Widget>> m_uiElements;
@@ -59,9 +62,11 @@ namespace jam {
             std::shared_ptr<IRiddle> m_currentRiddle;
             ui::Text m_timer;
             ui::Text m_score;
-            int m_scoreValue;
+            int m_goodAnswers;
             int m_currentRiddleIndex;
             float m_totalTime = 0;
+            int m_scoreValue = 0;
+            int m_previousBest = 0;
     };
 
 }

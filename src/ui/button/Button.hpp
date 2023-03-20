@@ -19,6 +19,7 @@
         class Button : public Widget, public Box {
             public:
                 enum State { IDLE, HOVERED, PRESSED };
+                Button(const Button& other);
                 Button(const sf::Texture& texture, const std::string& label);
                 void setFunction(std::function<void(void)> func);
                 Text& getLabel();
